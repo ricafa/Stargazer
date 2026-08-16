@@ -1,0 +1,66 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { url } from '../utils/url';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const latest = posts.slice(0, 5);
+---
+
+<!doctype html>
+<html lang="pt-BR">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>Stargazer</h1>
+			<p>{SITE_DESCRIPTION}</p>
+
+			<h2>Últimos artigos</h2>
+			<ul class="posts">
+				{
+					latest.map((post) => (
+						<li>
+							<a href={url(`/blog/${post.id}/`)}>{post.data.title}</a>
+							<p class="date">
+								<FormattedDate date={post.data.pubDate} />
+							</p>
+							<p>{post.data.description}</p>
+						</li>
+					))
+				}
+			</ul>
+
+			{posts.length > latest.length && <p><a href={url('/blog')}>Ver todos os artigos →</a></p>}
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.posts {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.posts li {
+		margin-bottom: 2em;
+	}
+	.posts li > a {
+		font-size: 1.4em;
+		font-weight: 700;
+	}
+	.date {
+		margin: 0.2em 0 0.6em 0;
+		color: rgb(var(--gray));
+		font-size: 0.9em;
+	}
+</style>

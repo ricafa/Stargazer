@@ -1,0 +1,55 @@
+---
+title: 'Pare de ser cético em relação à IA para o desenvolvimento'
+description: 'Em 2025, era racional ser cético em relação à IA. Em 2026, já não é mais. Notas sobre a conversa com Charity Majors, CTO e cofundadora da Honeycomb.'
+pubDate: 'Aug 16 2026'
+---
+
+Em 2025, era racional ser cético em relação à IA. Em 2026, já não é mais. Com Charity Majors, CTO e cofundadora da Honeycomb.
+
+## 1. Principal ponto
+
+A tese central é que o ceticismo severo em relação à IA na engenharia de software deixou de ser racional. Se antes era justificável encarar a IA apenas como um "gerador de código com ruído", o avanço dos ecossistemas de ferramentas (harnesses, testes, CI e observabilidade) mudou a economia do desenvolvimento.
+
+A pergunta fundamental mudou de "A IA consegue escrever código confiável?" para "Como reconstruímos a confiança no sistema quando o código é gerado massivamente por IA sem ter sido lido linha por linha por um humano?". O gargalo da engenharia se deslocou da criação de código para a verificação, avaliação e validação em produção.
+
+## 2. A lógica / argumentação do artigo
+
+O raciocínio de Charity Majors e Gergely Orosz segue estes passos lógicos:
+
+### A inversão econômica do código
+
+**Antes:** gerar código (escrever funções, refatorar) era a etapa cara e demorada. Revisar e testar era uma etapa secundária para garantir qualidade.
+
+**Agora:** gerar 10.000 variações de uma função custa centavos e leva segundos. O recurso escasso e caro passou a ser a validação (testes automatizados, evals, checagem de conformidade e observabilidade em produção).
+
+### O "livro razão da confiança" (Trust Ledger)
+
+A IA "suga" a confiança no momento da criação, porque gera código que nenhum humano leu ou compreendeu profundamente.
+
+Para compensar esse "débito de confiança", o ecossistema de engenharia precisa injetar confiança em outro lugar: suítes de testes automatizados extremamente rigorosas, testes de concorrência/invariantes, ferramentas de CI prontas para absorver alto volume e telemetria avançada em produção.
+
+### Reescrever em vez de editar (substituição > alteração)
+
+Assim como a infraestrutura moderna se tornou imutável (você não entra num servidor para consertá-lo, você o destrói e sobe um novo contêiner), o código de aplicação segue o mesmo caminho. Quando reescrever é barato e rápido, tentar "editar pontualmente" código legado fica arriscado. Substituir partes do sistema via agentes passa a ser a norma.
+
+### Sistemas não-determinísticos exigem mais disciplina
+
+Como a IA introduz não-determinismo, a engenharia de software não pode mais depender de "vibes" ou de revisões de código puramente manuais. Exige-se um nível mais elevado de disciplina técnica, regras explícitas (linters, testes automatizados) e monitoramento contínuo do comportamento do sistema em produção.
+
+### A mudança no papel dos engenheiros
+
+Os engenheiros humanos deixam de ser "digitadores de sintaxe" para se tornarem arquitetos de validação e guardiões de contexto. O foco passa a ser discutir direção, arquitetura e garantias do sistema, em vez de fazer "nitpicking" (procurar pequenos detalhes) em revisões de código.
+
+## 3. Analogia: a construção de casas e paredes pré-fabricadas
+
+Para entender essa mudança lógica, imagine como construíamos e como passamos a construir casas:
+
+**O modelo tradicional (manual):** imagine um pedreiro assentando tijolo por tijolo de uma parede. Como ele mesmo assenta cada tijolo, ele inspeciona a massa, ajusta o nível a todo momento e conhece cada centímetro daquela estrutura. Escrever código manualmente era como assentar tijolos: lento, minucioso, onde o próprio ato de construir já trazia uma inspeção visual contínua.
+
+**O modelo com IA (impressão 3D ou pré-fabricados em massa):** agora, imagine que surgiram máquinas industriais capazes de erguer paredes inteiras ou imprimir uma casa completa em questão de minutos. O pedreiro não precisa mais assentar tijolos. No entanto, ele não pode simplesmente confiar ceticamente que a parede não vai ruir, nem faz sentido ele tentar inspecionar tijolo por tijolo depois de pronto.
+
+**Onde entra a verificação (a lógica do artigo):** como a fabricação da parede ficou instantânea, o trabalho do engenheiro muda: em vez de pegar na colher de pedreiro, ele precisa aplicar testes de carga mecânica, ultrassom estrutural e sensores de vibração (observabilidade). O esforço humano não está mais na "mão de obra de erguer a parede", mas sim na criação dos testes e instrumentos que garantem que a estrutura aguenta o peso, antes e depois de as pessoas morarem nela.
+
+---
+
+**Fonte:** [Stop being skeptical about AI for development — The Pragmatic Engineer](https://newsletter.pragmaticengineer.com/p/stop-being-skeptical-about-ai-for)

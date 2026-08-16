@@ -1,0 +1,68 @@
+---
+import { SITE_TITLE } from '../consts';
+import { url } from '../utils/url';
+import HeaderLink from './HeaderLink.astro';
+---
+
+<header>
+	<nav>
+		<h2><a href={url('/')}>{SITE_TITLE}</a></h2>
+		<div class="internal-links">
+			<HeaderLink href="/">Início</HeaderLink>
+			<HeaderLink href="/blog">Artigos</HeaderLink>
+			<HeaderLink href="/sobre">Sobre</HeaderLink>
+		</div>
+		<div class="social-links">
+			<a href={url('/rss.xml')}>
+				<span class="sr-only">Assinar o feed RSS</span>
+				<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32"
+					><path
+						fill="currentColor"
+						d="M2 2v2.5c5.238 0 9.5 4.262 9.5 9.5H14C14 7.383 8.617 2 2 2zm0 4.5V9c2.757 0 5 2.243 5 5h2.5C9.5 9.865 6.135 6.5 2 6.5zM3.5 11a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"
+					></path></svg
+				>
+			</a>
+		</div>
+	</nav>
+</header>
+<style>
+	header {
+		margin: 0;
+		padding: 0 1em;
+		background: white;
+		box-shadow: 0 2px 8px rgba(var(--black), 5%);
+	}
+	h2 {
+		margin: 0;
+		font-size: 1em;
+	}
+
+	h2 a,
+	h2 a.active {
+		text-decoration: none;
+	}
+	nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	nav a {
+		padding: 1em 0.5em;
+		color: var(--black);
+		border-bottom: 4px solid transparent;
+		text-decoration: none;
+	}
+	nav a.active {
+		text-decoration: none;
+		border-bottom-color: var(--accent);
+	}
+	.social-links,
+	.social-links a {
+		display: flex;
+	}
+	@media (max-width: 720px) {
+		.social-links {
+			display: none;
+		}
+	}
+</style>

@@ -1,0 +1,27 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="pt-BR">
+	<head>
+		<BaseHead title={`Sobre | ${SITE_TITLE}`} description="Sobre este blog." />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>Sobre</h1>
+			<p>
+				Stargazer é um caderno público: leituras, resumos e anotações sobre engenharia de software e
+				IA. Poucos artigos, sem pressa.
+			</p>
+			<p>
+				<!-- TROCAR: escreva aqui quem você é e como te encontrar. -->
+			</p>
+		</main>
+		<Footer />
+	</body>
+</html>
