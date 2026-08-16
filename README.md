@@ -26,6 +26,38 @@ Blog estático feito com [Astro](https://astro.build), publicado de graça no Gi
 Campos opcionais: `updatedDate` (mesma formatação de `pubDate`) e `heroImage`
 (ex.: `heroImage: '../../assets/minha-imagem.jpg'`, com o arquivo em `src/assets/`).
 
+## Seções com resumo e sanfona
+
+Para um artigo em que cada seção mostra um resumo curto e esconde o texto completo atrás de um
+clique, use a extensão `.mdx` em vez de `.md` e o componente `Secao`:
+
+```mdx
+---
+title: 'Título do artigo'
+description: 'Uma frase.'
+pubDate: 'Aug 16 2026'
+---
+
+import Secao from '../../components/Secao.astro';
+
+Um parágrafo de abertura, fora das seções.
+
+<Secao titulo="1. Primeira seção" resumo="Uma frase de no máximo 124 caracteres.">
+
+O texto completo da seção, em Markdown. **Precisa** de uma linha em branco antes e
+depois — é assim que o MDX entende que o conteúdo é Markdown, e não JSX.
+
+### Subtítulos funcionam normalmente
+
+</Secao>
+```
+
+O limite de 124 caracteres do `resumo` é verificado durante o build: se passar, o build falha
+apontando a seção e o tamanho, em vez de publicar um resumo cortado.
+
+Um artigo pode misturar seções em sanfona e texto solto — o que ficar fora de `<Secao>` aparece
+sempre visível.
+
 ## Ver o site antes de publicar
 
 ```sh

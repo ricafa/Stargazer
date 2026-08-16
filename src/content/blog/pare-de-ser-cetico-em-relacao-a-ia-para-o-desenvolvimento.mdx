@@ -4,15 +4,25 @@ description: 'Em 2025, era racional ser cético em relação à IA. Em 2026, já
 pubDate: 'Aug 16 2026'
 ---
 
+import Secao from '../../components/Secao.astro';
+
 Em 2025, era racional ser cético em relação à IA. Em 2026, já não é mais. Com Charity Majors, CTO e cofundadora da Honeycomb.
 
-## 1. Principal ponto
+<Secao
+	titulo="1. Principal ponto"
+	resumo="O gargalo saiu da escrita do código e foi para a verificação: como confiar em código que nenhum humano leu?"
+>
 
 A tese central é que o ceticismo severo em relação à IA na engenharia de software deixou de ser racional. Se antes era justificável encarar a IA apenas como um "gerador de código com ruído", o avanço dos ecossistemas de ferramentas (harnesses, testes, CI e observabilidade) mudou a economia do desenvolvimento.
 
 A pergunta fundamental mudou de "A IA consegue escrever código confiável?" para "Como reconstruímos a confiança no sistema quando o código é gerado massivamente por IA sem ter sido lido linha por linha por um humano?". O gargalo da engenharia se deslocou da criação de código para a verificação, avaliação e validação em produção.
 
-## 2. A lógica / argumentação do artigo
+</Secao>
+
+<Secao
+	titulo="2. A lógica / argumentação do artigo"
+	resumo="Código barato, confiança virando dívida, reescrever no lugar de editar, mais disciplina e um novo papel humano."
+>
 
 O raciocínio de Charity Majors e Gergely Orosz segue estes passos lógicos:
 
@@ -40,7 +50,12 @@ Como a IA introduz não-determinismo, a engenharia de software não pode mais de
 
 Os engenheiros humanos deixam de ser "digitadores de sintaxe" para se tornarem arquitetos de validação e guardiões de contexto. O foco passa a ser discutir direção, arquitetura e garantias do sistema, em vez de fazer "nitpicking" (procurar pequenos detalhes) em revisões de código.
 
-## 3. Analogia: a construção de casas e paredes pré-fabricadas
+</Secao>
+
+<Secao
+	titulo="3. Analogia: a construção de casas e paredes pré-fabricadas"
+	resumo="Erguer a parede virou instantâneo, então o engenheiro larga a colher de pedreiro e passa a fazer teste de carga."
+>
 
 Para entender essa mudança lógica, imagine como construíamos e como passamos a construir casas:
 
@@ -49,6 +64,8 @@ Para entender essa mudança lógica, imagine como construíamos e como passamos 
 **O modelo com IA (impressão 3D ou pré-fabricados em massa):** agora, imagine que surgiram máquinas industriais capazes de erguer paredes inteiras ou imprimir uma casa completa em questão de minutos. O pedreiro não precisa mais assentar tijolos. No entanto, ele não pode simplesmente confiar ceticamente que a parede não vai ruir, nem faz sentido ele tentar inspecionar tijolo por tijolo depois de pronto.
 
 **Onde entra a verificação (a lógica do artigo):** como a fabricação da parede ficou instantânea, o trabalho do engenheiro muda: em vez de pegar na colher de pedreiro, ele precisa aplicar testes de carga mecânica, ultrassom estrutural e sensores de vibração (observabilidade). O esforço humano não está mais na "mão de obra de erguer a parede", mas sim na criação dos testes e instrumentos que garantem que a estrutura aguenta o peso, antes e depois de as pessoas morarem nela.
+
+</Secao>
 
 ---
 

@@ -1,0 +1,122 @@
+---
+/**
+ * Uma seção de artigo: título, um resumo curto sempre visível e o texto
+ * completo dentro de uma sanfona que começa fechada.
+ *
+ * Uso (em arquivos .mdx):
+ *   <Secao titulo="1. Principal ponto" resumo="Uma frase curta.">
+ *     O texto completo em Markdown.
+ *   </Secao>
+ */
+interface Props {
+	titulo: string;
+	resumo: string;
+}
+
+const LIMITE_RESUMO = 124;
+
+const { titulo, resumo } = Astro.props;
+
+// Falha o build em vez de deixar passar um resumo longo demais.
+if (resumo.length > LIMITE_RESUMO) {
+	throw new Error(
+		`O resumo da seção "${titulo}" tem ${resumo.length} caracteres e o limite é ${LIMITE_RESUMO}.`,
+	);
+}
+---
+
+<section class="secao">
+	<h2>{titulo}</h2>
+	<p class="resumo">{resumo}</p>
+	<details>
+		<summary>
+			<span class="rotulo-fechado">Ler a seção completa</span>
+			<span class="rotulo-aberto">Fechar a seção</span>
+		</summary>
+		<div class="conteudo">
+			<slot />
+		</div>
+	</details>
+</section>
+
+<style>
+	.secao {
+		margin-bottom: 3em;
+	}
+	.secao h2 {
+		font-size: 1.953em;
+	}
+	.resumo {
+		margin: 0 0 0.8em 0;
+		color: rgb(var(--gray));
+		font-size: 1.1em;
+		line-height: 1.5;
+	}
+
+	details {
+		border-top: 1px solid rgb(var(--gray-light));
+	}
+
+	summary {
+		display: flex;
+		align-items: center;
+		gap: 0.5em;
+		padding: 0.6em 0;
+		color: var(--accent);
+		font-size: 0.85em;
+		font-weight: 700;
+		cursor: pointer;
+		list-style: none;
+	}
+	/* Esconde o triângulo padrão do navegador (Safari usa o seletor -webkit). */
+	summary::-webkit-details-marker {
+		display: none;
+	}
+	summary::before {
+		content: '';
+		width: 0;
+		height: 0;
+		border-left: 0.45em solid currentColor;
+		border-top: 0.32em solid transparent;
+		border-bottom: 0.32em solid transparent;
+		transition: transform 0.15s ease;
+	}
+	details[open] summary::before {
+		transform: rotate(90deg);
+	}
+	summary:hover {
+		color: var(--accent-dark);
+	}
+	summary:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 3px;
+	}
+
+	.rotulo-aberto {
+		display: none;
+	}
+	details[open] .rotulo-fechado {
+		display: none;
+	}
+	details[open] .rotulo-aberto {
+		display: inline;
+	}
+
+	.conteudo {
+		padding-bottom: 0.5em;
+	}
+	/* O primeiro parágrafo já vem logo abaixo do botão; sem margem extra. */
+	.conteudo > :global(:first-child) {
+		margin-top: 0;
+	}
+	.conteudo > :global(h3) {
+		margin-top: 1.5em;
+		font-size: 1.35em;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		summary::before {
+			transition: none;
+		}
+	}
+</style>
