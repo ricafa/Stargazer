@@ -68,7 +68,7 @@ Abre em `http://localhost:4321`. Para conferir o resultado final: `npm run build
 
 ## Publicar no GitHub Pages (uma vez só)
 
-1. Crie um repositório no GitHub chamado `Stargazer`.
+1. Crie um repositório no GitHub chamado `stargazer`.
 2. Confira o `site` em `astro.config.mjs` (hoje: `https://ricafa.github.io`).
 3. Suba o código:
 
@@ -77,16 +77,20 @@ Abre em `http://localhost:4321`. Para conferir o resultado final: `npm run build
    git add .
    git commit -m "Primeiro post"
    git branch -M main
-   git remote add origin https://github.com/ricafa/Stargazer.git
+   git remote add origin https://github.com/ricafa/stargazer.git
    git push -u origin main
    ```
 
 4. No repositório: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 
-O site fica em `https://ricafa.github.io/Stargazer`.
+O site fica em `https://ricafa.github.io/stargazer`.
 
+> O `base` no `astro.config.mjs` precisa ser idêntico ao nome do repositório, inclusive na caixa
+> das letras. Se um dia o repositório mudar de nome, mude o `base` junto — senão o site sobe sem
+> CSS e com os links internos quebrados.
+>
 > Se preferir o endereço sem a subpasta, nomeie o repositório como `ricafa.github.io` e
-> remova a linha `base: '/Stargazer'` do `astro.config.mjs`. O resto funciona igual.
+> remova a linha `base: '/stargazer'` do `astro.config.mjs`. O resto funciona igual.
 
 ## Estrutura
 

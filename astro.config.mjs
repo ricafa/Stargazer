@@ -6,10 +6,12 @@ import { defineConfig, fontProviders } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	// O repositório se chama `Stargazer`, então o site fica em
-	// https://ricafa.github.io/Stargazer
+	// O repositório se chama `stargazer`, então o site fica em
+	// https://ricafa.github.io/stargazer
+	// Atenção: o `base` diferencia maiúsculas de minúsculas e precisa bater
+	// exatamente com o nome do repositório no GitHub.
 	site: 'https://ricafa.github.io',
-	base: '/Stargazer',
+	base: '/stargazer',
 	integrations: [mdx(), sitemap()],
 	fonts: [
 		{
