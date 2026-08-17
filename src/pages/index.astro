@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { tagSlug } from '../utils/tags';
 import { url } from '../utils/url';
 
 const posts = (await getCollection('blog')).sort(
@@ -34,6 +35,17 @@ const latest = posts.slice(0, 5);
 								<FormattedDate date={post.data.pubDate} />
 							</p>
 							<p>{post.data.description}</p>
+							{
+								post.data.tags.length > 0 && (
+									<ul class="tags">
+										{post.data.tags.map((tag) => (
+											<li>
+												<a href={url(`/blog/tags/${tagSlug(tag)}/`)}>{tag}</a>
+											</li>
+										))}
+									</ul>
+								)
+							}
 						</li>
 					))
 				}
@@ -62,5 +74,26 @@ const latest = posts.slice(0, 5);
 		margin: 0.2em 0 0.6em 0;
 		color: rgb(var(--gray));
 		font-size: 0.9em;
+	}
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4em;
+		margin: 0.5em 0 0 0;
+		padding: 0;
+		list-style: none;
+	}
+	.tags a {
+		display: inline-block;
+		padding: 0.15em 0.6em;
+		border-radius: 999px;
+		background: rgb(var(--gray-light));
+		color: rgb(var(--gray-dark));
+		font-size: 0.8rem;
+		text-decoration: none;
+	}
+	.tags a:hover {
+		background: var(--accent);
+		color: #fff;
 	}
 </style>

@@ -1,0 +1,78 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../../components/BaseHead.astro';
+import Footer from '../../../components/Footer.astro';
+import FormattedDate from '../../../components/FormattedDate.astro';
+import Header from '../../../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../../../consts';
+import { tagSlug } from '../../../utils/tags';
+import { url } from '../../../utils/url';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	const tags = new Set(posts.flatMap((post) => post.data.tags));
+
+	return Array.from(tags).map((tag) => {
+		const slug = tagSlug(tag);
+		return {
+			params: { tag: slug },
+			props: {
+				tag,
+				posts: posts
+					.filter((post) => post.data.tags.some((t) => tagSlug(t) === slug))
+					.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+			},
+		};
+	});
+}
+
+const { tag, posts } = Astro.props;
+---
+
+<!doctype html>
+<html lang="pt-BR">
+	<head>
+		<BaseHead title={`${tag} — ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>Tag: {tag}</h1>
+			<p><a href={url('/blog')}>← Todos os artigos</a></p>
+			<ul class="posts">
+				{
+					posts.map((post) => (
+						<li>
+							<a href={url(`/blog/${post.id}/`)}>{post.data.title}</a>
+							<p class="date">
+								<FormattedDate date={post.data.pubDate} />
+							</p>
+							<p>{post.data.description}</p>
+						</li>
+					))
+				}
+			</ul>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.posts {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.posts li {
+		margin-bottom: 2em;
+	}
+	.posts li > a {
+		font-size: 1.4em;
+		font-weight: 700;
+	}
+	.date {
+		margin: 0.2em 0 0.6em 0;
+		color: rgb(var(--gray));
+		font-size: 0.9em;
+	}
+</style>
